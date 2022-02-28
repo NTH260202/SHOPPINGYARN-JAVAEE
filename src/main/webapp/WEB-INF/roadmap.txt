@@ -1,0 +1,10 @@
+search=SearchFirstnameServlet
+delete=DeleteAccountServlet
+update=UpdateAccountServlet
+addOrder=AddNewOrder
+viewProduct=ViewProductServlet
+viewCart=ViewCartServlet
+addItemToCart=AddItemToCartServlet
+viewItems=ViewItemsInCartServlet
+deleteItems=DeleteItemFromCartServlet
+checkout=CreateOrderDetailServlet
