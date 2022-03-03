@@ -60,7 +60,7 @@ public class CreateOrderDetailServlet extends HttpServlet {
         } catch (SQLException | IOException | NamingException e) {
             String errorMessage = e.getMessage();
             log("CreateOrderDetailServlet" + errorMessage);
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 

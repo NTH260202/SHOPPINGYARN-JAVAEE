@@ -61,7 +61,7 @@ public class OrderDetailDAO implements Serializable {
                     return true;
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             String errorMessage = e.getMessage();
             log("OrderDetailDAO " + errorMessage);
