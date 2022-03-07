@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>Search Page</h1>
-<form action="search">
+<form action="searchAccount">
     Search Value <input type="text" name="txtSearchValue" value="${param.txtSearchValue}"/><br/>
     <input type="submit"/>
 </form>
@@ -38,11 +38,11 @@
                 </thead>
                 <tbody>
                     <c:forEach varStatus="index" var="accounts" items="${result}">
-                        <c:url var="deleteURL" value="delete">
+                        <c:url var="deleteURL" value="deleteAccount">
                             <c:param name="lastSearchValue" value="${param.txtSearchValue}"/>
                             <c:param name="deleteValue" value="${accounts.username}"/>
                         </c:url>
-                        <form action="update">
+                        <form action="updateAccount">
                             <tr>
                                 <td>${index.count}</td>
                                 <td>
@@ -76,7 +76,5 @@
     <c:if test="${empty result}">
         <h2>No result is matched!</h2>
     </c:if>
-
-    <a href="viewProduct">Shopping Now!! JSP File</a>
 </body>
 </html>

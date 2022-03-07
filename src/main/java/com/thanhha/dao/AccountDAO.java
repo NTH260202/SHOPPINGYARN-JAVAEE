@@ -29,13 +29,42 @@ public class AccountDAO implements Serializable {
             connection.close();
         }
     }
+
+    public AccountDTO getAccountByUsernameAndPassword(String username, String password) throws SQLException, NamingException {
+        AccountDTO account = null;
+        try {
+            //1. connect database
+            connection = DBHelper.makeConnection();
+            if (connection != null) {
+                //2.Create SQL String
+                String sql = "SELECT firstname, lastname " +
+                        "FROM account " +
+                        "WHERE username = ? AND password = ?";
+                //3.Create statement
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, username);
+                statement.setString(2, password);
+                //4.Query Data
+                resultSet = statement.executeQuery();
+                //5.Process Data
+                if (resultSet.next()) {
+                    String firstname = resultSet.getString("firstname");
+                    String lastname = resultSet.getString("lastname");
+                    account = new AccountDTO(username, password, firstname, lastname);
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return account;
+    }
     public List<AccountDTO> getAccountByFirstname(String searchValue) throws SQLException, NamingException {
         List<AccountDTO> accountList = null;
 
         try {
             connection = DBHelper.makeConnection();
             if (connection != null) {
-                String sql = "SELECT username, [password], isAdmin, firstname " +
+                String sql = "SELECT username, [password], isAdmin, firstname, lastname " +
                         " FROM account " +
                         " WHERE firstname like ?";
                 statement = connection.prepareStatement(sql);
@@ -46,9 +75,10 @@ public class AccountDAO implements Serializable {
                     String username = resultSet.getString("username");
                     String password = resultSet.getString("password");
                     String firstname = resultSet.getString("firstname");
+                    String lastname = resultSet.getString("lastname");
                     boolean isAdmin = resultSet.getBoolean("isAdmin");
 
-                    AccountDTO account = new AccountDTO(username, password, firstname, isAdmin, null);
+                    AccountDTO account = new AccountDTO(username, password, firstname, isAdmin, null, lastname);
                     if (accountList == null) {
                         accountList = new ArrayList<>();
                     }
