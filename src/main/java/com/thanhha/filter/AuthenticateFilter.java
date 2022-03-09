@@ -22,17 +22,17 @@ public class AuthenticateFilter implements Filter {
         HttpServletRequest servletRequest = (HttpServletRequest) request;
 
         HttpSession session = servletRequest.getSession(false);
+        System.out.println("Session" + session);
         HttpServletRequest req = (HttpServletRequest) request;
         String uri = req.getRequestURI();
-        String url;
-            //get site map
+        String userAccess;
         ServletContext context = request.getServletContext();
-        Properties siteMap = (Properties) context.getAttribute("SITE_MAP");
-            //get resource name
+        Properties userAccessMap = (Properties) context.getAttribute("USER_ACCESS");
         int lastIndex = uri.lastIndexOf("/");
         String resource = uri.substring(lastIndex + 1);
         System.out.println(resource);
-        if (session == null && !resource.equals("login")) {
+        userAccess = userAccessMap.getProperty(resource);
+        if (session == null && userAccess.equals("restricted")) {
             RequestDispatcher dispatcher = servletRequest.getRequestDispatcher(LOGIN_PAGE);
             dispatcher.forward(request, response);
         } else {

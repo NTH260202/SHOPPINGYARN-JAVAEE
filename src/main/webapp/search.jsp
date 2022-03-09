@@ -77,5 +77,6 @@
     <c:if test="${empty result}">
         <h2>No result is matched!</h2>
     </c:if>
+    <a href="logout">Log Out</a>
 </body>
 </html>

@@ -21,5 +21,6 @@ public class ResourceUrl implements Serializable {
         public static final String ERROR_PAGE = "errorPage";
         public static final String PRODUCT_PAGE = "viewProduct";
         public static final String CART_PAGE = "cartPage";
+        public static final String LOGIN_PAGE = "loginPage";
     }
 }

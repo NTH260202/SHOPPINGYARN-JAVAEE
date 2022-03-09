@@ -18,9 +18,12 @@ public class PathListener implements ServletContextListener, HttpSessionListener
         ServletContext context = sce.getServletContext();
         String siteMapLocation =
                 context.getInitParameter("SITEMAP_PROPERTIES_FILE_LOCATION");
+        String userAccess =
+                context.getInitParameter("AUTHORIZATION_PROPERTIES_USER_ACCESS");
         Properties siteMapProperty = PropertiesFileHelper.getProperties(context, siteMapLocation);
+        Properties accessRightProperty = PropertiesFileHelper.getProperties(context, userAccess);
         context.setAttribute("SITE_MAP", siteMapProperty);
-
+        context.setAttribute("USER_ACCESS", accessRightProperty);
     }
 
     @Override

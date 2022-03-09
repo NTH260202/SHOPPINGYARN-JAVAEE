@@ -39,6 +39,6 @@
                 </c:forEach>
                 </tbody>
             </table>
-        <a href="itemsOfCart.jsp">View Your Cart</a>
+        <a href="cartPage">View Your Cart</a><br/>
     </body>
 </html>
