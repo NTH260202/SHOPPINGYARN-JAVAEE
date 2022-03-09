@@ -20,23 +20,17 @@ public class AuthenticateFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest servletRequest = (HttpServletRequest) request;
-
         HttpSession session = servletRequest.getSession(false);
-        System.out.println("Session" + session);
-        HttpServletRequest req = (HttpServletRequest) request;
-        String uri = req.getRequestURI();
         String userAccess;
         ServletContext context = request.getServletContext();
         Properties userAccessMap = (Properties) context.getAttribute("USER_ACCESS");
-        int lastIndex = uri.lastIndexOf("/");
-        String resource = uri.substring(lastIndex + 1);
-        System.out.println(resource);
+        String servletPath = servletRequest.getServletPath();
+        String resource = servletPath.substring(1);
         userAccess = userAccessMap.getProperty(resource);
         if (session == null && userAccess.equals("restricted")) {
             RequestDispatcher dispatcher = servletRequest.getRequestDispatcher(LOGIN_PAGE);
             dispatcher.forward(request, response);
         } else {
-            System.out.println("Im passing filter");
             chain.doFilter(request, response);
         }
     }

@@ -8,9 +8,9 @@ import javax.servlet.annotation.*;
 import java.util.Properties;
 
 @WebListener
-public class PathListener implements ServletContextListener, HttpSessionListener, HttpSessionAttributeListener {
+public class ContextListener implements ServletContextListener, HttpSessionListener, HttpSessionAttributeListener {
 
-    public PathListener() {
+    public ContextListener() {
     }
 
     @Override

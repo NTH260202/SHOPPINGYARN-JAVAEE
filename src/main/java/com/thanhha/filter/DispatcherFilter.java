@@ -38,8 +38,7 @@ public class DispatcherFilter implements Filter {
 //        } catch (Throwable t) {
 //            log(t.getMessage());
 //        }
-        HttpServletRequest req = (HttpServletRequest) request;
-        String uri = req.getRequestURI();
+        HttpServletRequest servletRequest = (HttpServletRequest) request;
         String url;
         try {
             //get site map
@@ -47,15 +46,17 @@ public class DispatcherFilter implements Filter {
             Properties siteMap =
                     (Properties) context.getAttribute("SITE_MAP");
             //get resource name
-            int lastIndex = uri.lastIndexOf("/");
-            String resource = uri.substring(lastIndex + 1);
-            //get site mapping
+//            int lastIndex = uri.lastIndexOf("/");
+//            String resource = uri.substring(lastIndex + 1);
+//            //get site mapping
+//            url = siteMap.getProperty(resource);
+            String servletPath = servletRequest.getServletPath();
+            String resource = servletPath.substring(1);
             url = siteMap.getProperty(resource);
+            System.out.println("ServletPath " + servletPath);
             if (url != null) {
-                System.out.println("Im passing 2rd filter");
-                System.out.println(url);
-                RequestDispatcher rd = req.getRequestDispatcher(url);
-                rd.forward(request, response);
+                RequestDispatcher dispatcher = servletRequest.getRequestDispatcher(url);
+                dispatcher.forward(request, response);
             }
         } catch (Throwable t) {
             log(t.getMessage());
