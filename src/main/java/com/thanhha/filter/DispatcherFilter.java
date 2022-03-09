@@ -52,10 +52,10 @@ public class DispatcherFilter implements Filter {
             //get site mapping
             url = siteMap.getProperty(resource);
             if (url != null) {
+                System.out.println("Im passing 2rd filter");
+                System.out.println(url);
                 RequestDispatcher rd = req.getRequestDispatcher(url);
                 rd.forward(request, response);
-            } else {
-                chain.doFilter(request, response);
             }
         } catch (Throwable t) {
             log(t.getMessage());

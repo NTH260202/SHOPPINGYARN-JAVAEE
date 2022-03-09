@@ -16,6 +16,7 @@
 </head>
 <body>
 <h1>Search Page</h1>
+<span style="color: red; "> Welcome, ${sessionScope.USER.firstname} </span>
 <form action="searchAccount">
     Search Value <input type="text" name="txtSearchValue" value="${param.txtSearchValue}"/><br/>
     <input type="submit"/>
