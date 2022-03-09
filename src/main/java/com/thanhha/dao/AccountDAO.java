@@ -135,4 +135,28 @@ public class AccountDAO implements Serializable {
         }
         return false;
     }
+
+    public boolean createNewAccount(AccountDTO account) throws SQLException, NamingException {
+        try {
+            connection = DBHelper.makeConnection();
+            if (connection != null) {
+                String sql = "INSERT INTO account(username, password, firstname, lastname) " +
+                        "VALUES(?, ?, ?, ?)";
+                statement = connection.prepareStatement(sql);
+                System.out.println(account.getUsername());
+                statement.setString(1, account.getUsername());
+                statement.setString(2, account.getPassword());
+                statement.setString(3, account.getFirstname());
+                statement.setString(4, account.getLastname());
+                int rows = statement.executeUpdate();
+
+                if (rows > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return false;
+    }
 }

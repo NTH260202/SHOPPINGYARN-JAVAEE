@@ -18,15 +18,15 @@
         <h1>Create New Account</h1>
         <c:set var="errorMessgae" value="${requestScope.ERROR_MESSAGE}"/>
         <form action="register" method="POST">
-            Username* <input type="text" name="txtUsername" value="${param.txtUsername}"/> (e.g. 6-20 chars)
+            Username* <input type="text" name="txtUsername" value="${param.txtUsername}"/> (e.g. 6-20 chars) <br/>
             ${errorMessgae.usernameLengthErr} ${errorMessgae.usernameIsExisted} <br/>
-            Password* <input type="password" name="txtPassword" value=""/> (e.g. 6-30 chars)
+            Password* <input type="password" name="txtPassword" value=""/> (e.g. 6-30 chars)<br/>
             ${errorMessgae.passwordLengthErr}<br/>
-            Confirm* <input type="password" name="txtConfirm" value=""/>
+            Confirm* <input type="password" name="txtConfirm" value=""/> <br/>
             ${errorMessgae.confirmPasswordNotMatched} <br/>
-            First name* <input type="text" name="txtFirstname" value="${param.txtFirstname}"/> (e.g. 2-10 chars)
+            First name* <input type="text" name="txtFirstname" value="${param.txtFirstname}"/> (e.g. 2-10 chars)<br/>
             ${errorMessgae.firstnameLengthErr}<br/>
-            Last name* <input type="text" name="txtLastname" value="${param.txtLastname}"/> (e.g. 6-40 chars)
+            Last name* <input type="text" name="txtLastname" value="${param.txtLastname}"/> (e.g. 6-40 chars)<br/>
             ${errorMessgae.lastnameLengthErr}<br/>
             <input type="submit"/>
         </form>

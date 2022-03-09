@@ -4,14 +4,18 @@ import java.io.Serializable;
 
 public class RegisterErrorDTO implements Serializable {
     private String usernameLengthErr;
+    private String usernameIsExisted;
     private String passwordLengthErr;
     private String confirmPasswordNotMatched;
     private String firstnameLengthErr;
     private String lastnameLengthErr;
 
-    public RegisterErrorDTO(String usernameLengthErr, String passwordLengthErr, String confirmPasswordNotMatched,
+
+
+    public RegisterErrorDTO(String usernameLengthErr, String usernameIsExisted, String passwordLengthErr, String confirmPasswordNotMatched,
                             String firstnameLengthErr, String lastnameLengthErr) {
         this.usernameLengthErr = usernameLengthErr;
+        this.usernameIsExisted = usernameIsExisted;
         this.passwordLengthErr = passwordLengthErr;
         this.confirmPasswordNotMatched = confirmPasswordNotMatched;
         this.firstnameLengthErr = firstnameLengthErr;
@@ -27,6 +31,14 @@ public class RegisterErrorDTO implements Serializable {
 
     public void setUsernameLengthErr(String usernameLengthErr) {
         this.usernameLengthErr = usernameLengthErr;
+    }
+
+    public String getUsernameIsExisted() {
+        return usernameIsExisted;
+    }
+
+    public void setUsernameIsExisted(String usernameIsExisted) {
+        this.usernameIsExisted = usernameIsExisted;
     }
 
     public String getPasswordLengthErr() {
@@ -60,4 +72,5 @@ public class RegisterErrorDTO implements Serializable {
     public void setLastnameLengthErr(String lastnameLengthErr) {
         this.lastnameLengthErr = lastnameLengthErr;
     }
+
 }

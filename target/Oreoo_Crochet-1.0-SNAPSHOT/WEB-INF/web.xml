@@ -3,6 +3,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <context-param>
+        <param-name>SITEMAP_PROPERTIES_FILE_LOCATION</param-name>
+        <param-value>/WEB-INF/sitemap.properties</param-value>
+    </context-param>
     <filter>
         <filter-name>DispatcherFilter</filter-name>
         <filter-class>com.thanhha.filter.DispatcherFilter</filter-class>

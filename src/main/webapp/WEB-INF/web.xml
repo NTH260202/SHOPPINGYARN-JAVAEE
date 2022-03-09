@@ -5,7 +5,7 @@
          version="4.0">
     <context-param>
         <param-name>SITEMAP_PROPERTIES_FILE_LOCATION</param-name>
-        <param-value>/WEB-INF/siteMaps.properties</param-value>
+        <param-value>/WEB-INF/sitemap.properties</param-value>
     </context-param>
     <filter>
         <filter-name>DispatcherFilter</filter-name>

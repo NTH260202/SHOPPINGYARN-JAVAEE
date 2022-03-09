@@ -9,4 +9,6 @@ public class ResourceUrl implements Serializable {
     public static final String VIEW_PRODUCT_CATALOG = "productCatalog.jsp";
     public static final String VIEW_ITEMS_CART = "itemsOfCart.jsp";
     public static final String INVALID_ACCOUNT_PAGE = "invalidAccount.html";
+    public static final String REGISTER_ERROR_PAGE = "registerError.jsp";
+    public static final String LOGIN_PAGE = "login.html";
 }
