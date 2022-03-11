@@ -1,8 +1,8 @@
 package com.thanhha.controller.cart;
 
 import com.thanhha.cart.CartObject;
-import com.thanhha.dao.ProductDAO;
-import com.thanhha.dto.ProductDTO;
+import com.thanhha.product.ProductDAO;
+import com.thanhha.product.ProductDTO;
 
 import javax.naming.NamingException;
 import javax.servlet.*;
@@ -10,9 +10,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.thanhha.constant.ResourceUrl.PathName.PRODUCT_PAGE;
 

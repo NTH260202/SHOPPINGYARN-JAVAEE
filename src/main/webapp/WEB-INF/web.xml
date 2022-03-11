@@ -9,7 +9,7 @@
     </context-param>
     <context-param>
         <param-name>AUTHORIZATION_PROPERTIES_USER_ACCESS</param-name>
-        <param-value>/WEB-INF/authorization.properties</param-value>
+        <param-value>/WEB-INF/authentication.properties</param-value>
     </context-param>
     <filter>
         <filter-name>AuthenticateFilter</filter-name>

@@ -1,7 +1,7 @@
 package com.thanhha.controller.account;
 
-import com.thanhha.dao.AccountDAO;
-import com.thanhha.dto.AccountDTO;
+import com.thanhha.account.AccountDAO;
+import com.thanhha.account.AccountDTO;
 
 import javax.naming.NamingException;
 import javax.servlet.*;
@@ -38,9 +38,9 @@ public class AuthenticateServlet extends HttpServlet {
                 session.setAttribute("USER", validUser);
             }//end if validAccount is not null
         } catch (SQLException ex) {
-            log("AuthenticateServlet _ SQL _ " + ex.getMessage());
+            log("AuthenticateServlet _SQLException: " + ex.getMessage());
         } catch (NamingException ex) {
-            log("AuthenticateServlet _ Naming _ " + ex.getMessage());
+            log("AuthenticateServlet _NamingException: " + ex.getMessage());
         } finally {
             response.sendRedirect(url);
             out.close();

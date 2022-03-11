@@ -1,8 +1,8 @@
 package com.thanhha.controller.account;
 
-import com.thanhha.dao.AccountDAO;
-import com.thanhha.dto.AccountDTO;
-import com.thanhha.dto.RegisterErrorDTO;
+import com.thanhha.account.AccountDAO;
+import com.thanhha.account.AccountDTO;
+import com.thanhha.account.AccountRegisterError;
 
 import javax.naming.NamingException;
 import javax.servlet.*;
@@ -11,25 +11,17 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import static com.thanhha.constant.ErrorMessage.REGISTER.*;
+import static com.thanhha.constant.ErrorMessage.ACCOUNT.*;
 import static com.thanhha.constant.ResourceUrl.PathValue.LOGIN_PAGE;
 import static com.thanhha.constant.ResourceUrl.PathValue.REGISTER_ERROR_PAGE;
 
 @WebServlet(name = "CreateAccountServlet", value = "/CreateAccountServlet")
 public class CreateAccountServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-
         boolean foundError = false;
-        RegisterErrorDTO error = new RegisterErrorDTO();
+        AccountRegisterError error = new AccountRegisterError();
         String url = REGISTER_ERROR_PAGE;
 
         String username = request.getParameter("txtUsername");
@@ -69,7 +61,6 @@ public class CreateAccountServlet extends HttpServlet {
                 AccountDAO accountDAO = new AccountDAO();
                 AccountDTO account = new AccountDTO(username, password, firstname, lastname);
                 boolean result = accountDAO.createNewAccount(account);
-                System.out.println(result);
                 if (result) {
                     url = LOGIN_PAGE;
                 }

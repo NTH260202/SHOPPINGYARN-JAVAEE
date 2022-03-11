@@ -1,7 +1,7 @@
 package com.thanhha.controller.account;
 
-import com.thanhha.dao.AccountDAO;
-import com.thanhha.dto.AccountDTO;
+import com.thanhha.account.AccountDAO;
+import com.thanhha.account.AccountDTO;
 
 import javax.naming.NamingException;
 import javax.servlet.*;

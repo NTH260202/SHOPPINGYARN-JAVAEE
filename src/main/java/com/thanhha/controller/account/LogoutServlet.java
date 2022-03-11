@@ -18,6 +18,4 @@ public class LogoutServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher(LOGIN_PAGE);
         dispatcher.forward(request, response);
     }
-
-
 }

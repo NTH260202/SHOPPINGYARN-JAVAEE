@@ -1,11 +1,6 @@
 package com.thanhha.cart;
 
-import com.thanhha.dao.ProductDAO;
-import com.thanhha.dto.ProductDTO;
-
-import javax.naming.NamingException;
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 

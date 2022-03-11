@@ -1,6 +1,6 @@
 package com.thanhha.controller.account;
 
-import com.thanhha.dao.AccountDAO;
+import com.thanhha.account.AccountDAO;
 
 import javax.naming.NamingException;
 import javax.servlet.*;
@@ -30,7 +30,6 @@ public class UpdateAccountServlet extends HttpServlet {
         if (result) {
             url = "searchAccount?txtSearchValue=" + lastSearchValue;
         }
-
         response.sendRedirect(url);
     }
     @Override

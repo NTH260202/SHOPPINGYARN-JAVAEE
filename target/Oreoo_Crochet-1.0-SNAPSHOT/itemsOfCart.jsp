@@ -17,6 +17,8 @@
   <h1>Your Cart</h1>
   <c:set var="product_list" value="${sessionScope.PRODUCT_LIST}"/>
   <c:set var="cart" value="${sessionScope.CART}"/>
+  <c:set var="error" value="${requestScope.ERROR_MESSAGE}"/>
+
   <c:if test="${not empty cart}">
     <c:set var="cartItems" value="${cart.items}"/>
     <c:if test="${not empty cartItems}">
@@ -59,7 +61,10 @@
           </tbody>
         </table>
       </form>
-      <a href="checkout">Check Out</a>
+      <form action="checkout" method="POST">
+        <button type="submit">Check Out</button>
+      </form>
+      ${error.quantityIsInvalid}
     </c:if>
   </c:if>
   <c:if test="${empty cartItems}">

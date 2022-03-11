@@ -5,7 +5,7 @@
   Time: 8:29 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="false" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +16,6 @@
 </head>
 <body>
 <h1><font color="red">Invalid username or password!</font></h1>
-<a href="">Click Here To Try Login Again</a>
+<a href="loginPage">Click Here To Try Login Again</a>
 </body>
 </html>

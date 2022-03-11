@@ -1,15 +1,13 @@
 package com.thanhha.controller.product;
 
-import com.thanhha.dao.AccountDAO;
-import com.thanhha.dao.ProductDAO;
-import com.thanhha.dto.ProductDTO;
+import com.thanhha.product.ProductDAO;
+import com.thanhha.product.ProductDTO;
 
 import javax.naming.NamingException;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.List;
 

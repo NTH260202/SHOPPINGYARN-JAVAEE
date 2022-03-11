@@ -1,7 +1,6 @@
 package com.thanhha.controller.cart;
 
 import com.thanhha.cart.CartObject;
-import com.thanhha.dto.ProductDTO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
