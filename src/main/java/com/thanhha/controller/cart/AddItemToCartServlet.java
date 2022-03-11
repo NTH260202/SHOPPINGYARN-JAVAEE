@@ -30,7 +30,7 @@ public class AddItemToCartServlet extends HttpServlet {
 
             cart.addItemToCart(product.getId());
             session.setAttribute("CART", cart);
-            session.setAttribute("PRODUCT_LIST", productDAO.getAllProducts());
+            session.setAttribute("PRODUCT_LIST", productDAO.getAllProducts(true));
         } finally {
             response.sendRedirect(PRODUCT_PAGE);
         }

@@ -22,7 +22,7 @@ public class ViewProductServlet extends HttpServlet {
         String url = VIEW_PRODUCT_CATALOG;
 
         ProductDAO productDAO = new ProductDAO();
-        List<ProductDTO> productList = productDAO.getAllProducts();
+        List<ProductDTO> productList = productDAO.getAllProducts(true);
         request.setAttribute("VIEW_RESULT", productList);
 
 
@@ -35,14 +35,9 @@ public class ViewProductServlet extends HttpServlet {
         try {
             processHandle(request, response);
         } catch (SQLException e) {
-            e.printStackTrace();
+            log("ViewProductServlet_SQLException: " + e.getMessage());
         } catch (NamingException e) {
-            e.printStackTrace();
+            log("ViewProductServlet_NamingException: " + e.getMessage());
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

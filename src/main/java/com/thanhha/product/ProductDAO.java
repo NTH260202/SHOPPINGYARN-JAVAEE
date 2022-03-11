@@ -31,14 +31,16 @@ public class ProductDAO implements Serializable {
         }
     }
 
-    public List<ProductDTO> getAllProducts() throws SQLException, NamingException {
+    public List<ProductDTO> getAllProducts(boolean status) throws SQLException, NamingException {
         List<ProductDTO> productList = null;
         try {
             connection = DBHelper.makeConnection();
             if (connection != null) {
                 String sql = "SELECT id, [name], price, in_stock " +
-                        " FROM product ";
+                        " FROM product " +
+                        " WHERE status = ?";
                 statement = connection.prepareStatement(sql);
+                statement.setBoolean(1, status);
                 resultSet = statement.executeQuery();
 
                 while (resultSet.next()) {

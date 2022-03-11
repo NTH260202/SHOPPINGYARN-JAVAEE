@@ -16,14 +16,24 @@ import static com.thanhha.constant.ResourceUrl.PathValue.SEARCH_PAGE_RESULT;
 @WebServlet(name = "SearchFirstnameServlet", value = "/SearchFirstnameServlet")
 public class SearchFirstnameServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException, NamingException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
+        AccountDTO currentUser = (AccountDTO) session.getAttribute("USER");
 
         String searchValue = request.getParameter("txtSearchValue");
         String url = SEARCH_PAGE_RESULT;
 
         AccountDAO accountDAO = new AccountDAO();
         List<AccountDTO> accountList = accountDAO.getAccountByFirstname(searchValue);
+
+        if (accountList != null) {
+            for (AccountDTO account : accountList) {
+                if (currentUser.getUsername().equals(account.getUsername())) {
+                    accountList.remove(account);
+                    break;
+                }
+            }
+        }
+
         request.setAttribute("SEARCH_RESULT", accountList);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(url);

@@ -18,6 +18,12 @@
   <c:set var="product_list" value="${sessionScope.PRODUCT_LIST}"/>
   <c:set var="cart" value="${sessionScope.CART}"/>
   <c:set var="error" value="${requestScope.ERROR_MESSAGE}"/>
+  <c:set var="user" value="${sessionScope.USER}"/>
+
+  <c:if test="${not empty user}">
+    <span style="color: red; "> Welcome, ${user.firstname} </span><br/>
+    <a href="logout">Log Out</a>
+  </c:if>
 
   <c:if test="${not empty cart}">
     <c:set var="cartItems" value="${cart.items}"/>

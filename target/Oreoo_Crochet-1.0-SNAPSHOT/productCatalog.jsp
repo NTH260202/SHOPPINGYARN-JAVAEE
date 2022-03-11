@@ -14,6 +14,13 @@
         <title>Yarn Store</title>
     </head>
     <body>
+        <c:set var="user" value="${sessionScope.USER}"/>
+
+        <c:if test="${not empty user}">
+            <span style="color: red; "> Welcome, ${user.firstname} </span><br/>
+            <a href="logout">Log Out</a>
+        </c:if>
+
         <h1>Yarn Store</h1>
             <table>
                 <thead>
