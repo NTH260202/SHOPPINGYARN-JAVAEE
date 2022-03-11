@@ -43,7 +43,7 @@
                             <c:param name="lastSearchValue" value="${param.txtSearchValue}"/>
                             <c:param name="deleteValue" value="${accounts.username}"/>
                         </c:url>
-                        <form action="updateAccount">
+                        <form action="updateAccount" method="POST">
                             <tr>
                                 <td>${index.count}</td>
                                 <td>

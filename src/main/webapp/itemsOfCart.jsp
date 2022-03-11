@@ -70,7 +70,7 @@
       <form action="checkout" method="POST">
         <button type="submit">Check Out</button>
       </form>
-      ${error.quantityIsInvalid}
+      <span style="color: red; ">${error.quantityIsInvalid}</span><br/>
     </c:if>
   </c:if>
   <c:if test="${empty cartItems}">

@@ -9,11 +9,13 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 import static com.thanhha.constant.ErrorMessage.ACCOUNT.*;
 import static com.thanhha.constant.ResourceUrl.PathValue.LOGIN_PAGE;
 import static com.thanhha.constant.ResourceUrl.PathValue.REGISTER_ERROR_PAGE;
+import static com.thanhha.util.ParsingUtils.hashString;
 
 @WebServlet(name = "CreateAccountServlet", value = "/CreateAccountServlet")
 public class CreateAccountServlet extends HttpServlet {
@@ -21,8 +23,8 @@ public class CreateAccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         boolean foundError = false;
-        AccountRegisterError error = new AccountRegisterError();
         String url = REGISTER_ERROR_PAGE;
+        AccountRegisterError error = new AccountRegisterError();
 
         String username = request.getParameter("txtUsername");
         String password  = request.getParameter("txtPassword");
@@ -55,11 +57,12 @@ public class CreateAccountServlet extends HttpServlet {
         }
 
         try {
-            if(foundError) {
+            if (foundError) {
                 request.setAttribute("ERROR_MESSAGE", error);
             } else {
+                String hashedPassword = hashString(password);
                 AccountDAO accountDAO = new AccountDAO();
-                AccountDTO account = new AccountDTO(username, password, firstname, lastname);
+                AccountDTO account = new AccountDTO(username, hashedPassword, firstname, lastname);
                 boolean result = accountDAO.createNewAccount(account);
                 if (result) {
                     url = LOGIN_PAGE;
@@ -73,9 +76,11 @@ public class CreateAccountServlet extends HttpServlet {
             }
         } catch (NamingException e) {
             log("CreateAccountServlet_NamingException: " + e.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            log("CreateAccountServlet_NoSuchAlgorithmException: " + e.getMessage());
         } finally {
-        RequestDispatcher rd = request.getRequestDispatcher(url);
-        rd.forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 }

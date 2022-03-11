@@ -15,8 +15,8 @@ import static com.thanhha.constant.ResourceUrl.PathName.PRODUCT_PAGE;
 
 @WebServlet(name = "AddItemToCartServlet", value = "/AddItemToCartServlet")
 public class AddItemToCartServlet extends HttpServlet {
-    protected void processHandle(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException, NamingException {
-        response.setContentType("text/html;charset=UTF-8");
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
             CartObject cart = (CartObject) session.getAttribute("CART");
@@ -31,16 +31,10 @@ public class AddItemToCartServlet extends HttpServlet {
             cart.addItemToCart(product.getId());
             session.setAttribute("CART", cart);
             session.setAttribute("PRODUCT_LIST", productDAO.getAllProducts(true));
-        } finally {
-            response.sendRedirect(PRODUCT_PAGE);
-        }
-    }
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            processHandle(request, response);
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
+        } finally {
+            response.sendRedirect(PRODUCT_PAGE);
         }
     }
 

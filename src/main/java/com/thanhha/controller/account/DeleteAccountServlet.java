@@ -15,8 +15,6 @@ import static com.thanhha.constant.ResourceUrl.PathName.ERROR_PAGE;
 public class DeleteAccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
         String url = ERROR_PAGE;
 
         String lastSearchValue = request.getParameter("lastSearchValue");
@@ -28,10 +26,10 @@ public class DeleteAccountServlet extends HttpServlet {
                 url = "searchAccount?txtSearchValue=" + lastSearchValue;
             }
 
-        } catch (SQLException ex) {
-            log("AuthenticateServlet _SQLException: " + ex.getMessage());
-        } catch (NamingException ex) {
-            log("AuthenticateServlet _NamingException: " + ex.getMessage());
+        } catch (SQLException e) {
+            log("AuthenticateServlet _SQLException: " + e.getMessage());
+        } catch (NamingException e) {
+            log("AuthenticateServlet _NamingException: " + e.getMessage());
         } finally {
             response.sendRedirect(url);
         }

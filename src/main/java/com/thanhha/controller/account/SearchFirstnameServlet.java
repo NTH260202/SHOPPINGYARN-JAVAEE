@@ -15,42 +15,35 @@ import static com.thanhha.constant.ResourceUrl.PathValue.SEARCH_PAGE_RESULT;
 
 @WebServlet(name = "SearchFirstnameServlet", value = "/SearchFirstnameServlet")
 public class SearchFirstnameServlet extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException, NamingException {
-        HttpSession session = request.getSession(false);
-        AccountDTO currentUser = (AccountDTO) session.getAttribute("USER");
-
-        String searchValue = request.getParameter("txtSearchValue");
-        String url = SEARCH_PAGE_RESULT;
-
-        AccountDAO accountDAO = new AccountDAO();
-        List<AccountDTO> accountList = accountDAO.getAccountByFirstname(searchValue);
-
-        if (accountList != null) {
-            for (AccountDTO account : accountList) {
-                if (currentUser.getUsername().equals(account.getUsername())) {
-                    accountList.remove(account);
-                    break;
-                }
-            }
-        }
-
-        request.setAttribute("SEARCH_RESULT", accountList);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-        dispatcher.forward(request,response);
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            processRequest(request, response);
-        } catch (SQLException | NamingException e) {
-            e.printStackTrace();
+            HttpSession session = request.getSession(false);
+            AccountDTO currentUser = (AccountDTO) session.getAttribute("USER");
+
+            String searchValue = request.getParameter("txtSearchValue");
+            String url = SEARCH_PAGE_RESULT;
+
+            AccountDAO accountDAO = new AccountDAO();
+            List<AccountDTO> accountList = accountDAO.getAccountByFirstname(searchValue);
+
+            if (accountList != null) {
+                for (AccountDTO account : accountList) {
+                    if (currentUser.getUsername().equals(account.getUsername())) {
+                        accountList.remove(account);
+                        break;
+                    }
+                }
+            }
+
+            request.setAttribute("SEARCH_RESULT", accountList);
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+            dispatcher.forward(request,response);
+        } catch (SQLException e) {
+            log("SearchFirstnameServlet_SQLException: " + e.getMessage());
+        } catch (NamingException e) {
+            log("SearchFirstnameServlet_NamingException: " + e.getMessage());
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }
