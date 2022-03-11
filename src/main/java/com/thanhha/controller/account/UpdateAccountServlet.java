@@ -1,6 +1,8 @@
 package com.thanhha.controller.account;
 
 import com.thanhha.account.AccountDAO;
+import com.thanhha.account.AccountRegisterError;
+import com.thanhha.constant.ResourceUrl;
 
 import javax.naming.NamingException;
 import javax.servlet.*;
@@ -10,6 +12,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
+import static com.thanhha.constant.ErrorMessage.ACCOUNT.PASSWORD_LENGTH_ERROR;
 import static com.thanhha.constant.ResourceUrl.PathName.ERROR_PAGE;
 import static com.thanhha.util.ParsingUtils.hashString;
 
@@ -22,12 +25,10 @@ public class UpdateAccountServlet extends HttpServlet {
 
             String lastSearchValue = request.getParameter("updateParam");
             String updateKey = request.getParameter("updatePK");
-            String password = request.getParameter("password");
             boolean isAdmin = Boolean.parseBoolean(request.getParameter("isAdmin"));
 
-            String hashedPassword = hashString(password);
             AccountDAO accountDAO = new AccountDAO();
-            boolean result = accountDAO.updateAccountByUsername(updateKey, password, isAdmin);
+            boolean result = accountDAO.updateAccountByUsername(updateKey, isAdmin);
             if (result) {
                 url = "searchAccount?txtSearchValue=" + lastSearchValue;
             }
@@ -38,8 +39,6 @@ public class UpdateAccountServlet extends HttpServlet {
             log("UpdateAccountServlet_IOException: " + e.getMessage());
         } catch (NamingException e) {
             log("UpdateAccountServlet_NamingException: " + e.getMessage());
-        } catch (NoSuchAlgorithmException e) {
-            log("UpdateAccountServlet_NoSuchAlgorithmException " + e.getMessage());
         }
     }
 }

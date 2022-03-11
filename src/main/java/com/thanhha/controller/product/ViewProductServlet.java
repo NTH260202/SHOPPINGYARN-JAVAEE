@@ -15,25 +15,17 @@ import static com.thanhha.constant.ResourceUrl.PathValue.VIEW_PRODUCT_CATALOG;
 
 @WebServlet(name = "ViewProductServlet", value = "/ViewProductServlet")
 public class ViewProductServlet extends HttpServlet {
-    protected void processHandle(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, SQLException, NamingException, ServletException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        String url = VIEW_PRODUCT_CATALOG;
-
-        ProductDAO productDAO = new ProductDAO();
-        List<ProductDTO> productList = productDAO.getAllProducts(true);
-        request.setAttribute("VIEW_RESULT", productList);
-
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-        dispatcher.forward(request, response);
-
-    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            processHandle(request, response);
+            String url = VIEW_PRODUCT_CATALOG;
+
+            ProductDAO productDAO = new ProductDAO();
+            List<ProductDTO> productList = productDAO.getAllProducts(true);
+            request.setAttribute("VIEW_RESULT", productList);
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+            dispatcher.forward(request, response);
         } catch (SQLException e) {
             log("ViewProductServlet_SQLException: " + e.getMessage());
         } catch (NamingException e) {

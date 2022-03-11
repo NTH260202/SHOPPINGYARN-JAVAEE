@@ -112,18 +112,17 @@ public class AccountDAO implements Serializable {
         return false;
     }
 
-    public boolean updateAccountByUsername(String updatePK, String password, boolean isAdmin)
+    public boolean updateAccountByUsername(String updatePK, boolean isAdmin)
             throws SQLException, NamingException {
         try {
             connection = DBHelper.makeConnection();
             if (connection != null) {
                 String sql = "UPDATE account" +
-                        " SET password = ?, isAdmin = ? " +
+                        " SET isAdmin = ? " +
                         " WHERE username = ?";
                 statement = connection.prepareStatement(sql);
-                statement.setString(1, password);
-                statement.setBoolean(2, isAdmin);
-                statement.setString(3, updatePK);
+                statement.setBoolean(1, isAdmin);
+                statement.setString(2, updatePK);
                 int rows = statement.executeUpdate();
 
                 if (rows > 0) {

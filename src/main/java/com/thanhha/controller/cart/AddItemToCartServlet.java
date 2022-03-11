@@ -31,8 +31,10 @@ public class AddItemToCartServlet extends HttpServlet {
             cart.addItemToCart(product.getId());
             session.setAttribute("CART", cart);
             session.setAttribute("PRODUCT_LIST", productDAO.getAllProducts(true));
-        } catch (SQLException | NamingException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            log("AddItemToCartServlet_SQLException " + e.getMessage());
+        } catch (NamingException e) {
+            log("AddItemToCartServlet_NamingException " + e.getMessage());
         } finally {
             response.sendRedirect(PRODUCT_PAGE);
         }

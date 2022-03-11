@@ -31,7 +31,6 @@
                 <tr>
                     <th>No.</th>
                     <th>Username</th>
-                    <th>Password</th>
                     <th>First name</th>
                     <th>IsAdmin</th>
                     <th>Delete</th>
@@ -49,9 +48,6 @@
                                 <td>
                                         ${accounts.username}
                                     <input type="hidden" name="updatePK" value="${accounts.username}">
-                                </td>
-                                <td>
-                                    <input type="text" name="password" value="${accounts.password}">
                                 </td>
                                 <td>${accounts.firstname}</td>
                                 <td>
@@ -73,7 +69,7 @@
             </table>
         </c:if>
     </c:if>
-
+    <span style="color: red; ">${param.ERROR_MESSAGE} </span>
     <c:if test="${empty result}">
         <h2>No result is matched!</h2>
     </c:if>
