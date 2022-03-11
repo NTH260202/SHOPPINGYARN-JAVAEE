@@ -11,8 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-import static com.thanhha.constant.ResourceUrl.PathName.INVALID_ACCOUNT_PAGE;
-import static com.thanhha.constant.ResourceUrl.PathName.SEARCH_PAGE;
+import static com.thanhha.constant.ResourceUrl.PathName.*;
 
 @WebServlet(name = "AuthenticateServlet", value = "/AuthenticateServlet")
 public class AuthenticateServlet extends HttpServlet {
@@ -32,14 +31,20 @@ public class AuthenticateServlet extends HttpServlet {
                     dao.getAccountByUsernameAndPassword(
                             username, password);
             if (validUser != null) {
-                url = SEARCH_PAGE;
+                if (validUser.isAdmin()) {
+                    url = SEARCH_PAGE;
+                } else {
+                    url = PRODUCT_PAGE;
+                };
                 //create new session
                 HttpSession session = request.getSession(true);
                 session.setAttribute("USER", validUser);
             }//end if validAccount is not null
         } catch (SQLException ex) {
+            System.out.println("Im here after login sql " + ex.getMessage());
             log("AuthenticateServlet _SQLException: " + ex.getMessage());
         } catch (NamingException ex) {
+            System.out.println("Im here after login naming");
             log("AuthenticateServlet _NamingException: " + ex.getMessage());
         } finally {
             response.sendRedirect(url);

@@ -26,7 +26,8 @@ public class DispatcherFilter implements Filter {
             Properties siteMap = (Properties) context.getAttribute("SITE_MAP");
             String servletPath = servletRequest.getServletPath();
             String resource = servletPath.substring(1);
-//            if (resource.equals(LOGIN_PAGE)) {
+            System.out.println("resource " + resource);
+//            if (resource.equals("")) {
 //                url = SEARCH_PAGE_RESULT;
 //            } else {
                 url = siteMap.getProperty(resource);

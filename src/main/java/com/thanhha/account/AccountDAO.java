@@ -36,7 +36,7 @@ public class AccountDAO implements Serializable {
             connection = DBHelper.makeConnection();
             if (connection != null) {
                 //2.Create SQL String
-                String sql = "SELECT firstname, lastname " +
+                String sql = "SELECT firstname, lastname, isAdmin " +
                         "FROM account " +
                         "WHERE username = ? AND password = ?";
                 //3.Create statement
@@ -49,7 +49,8 @@ public class AccountDAO implements Serializable {
                 if (resultSet.next()) {
                     String firstname = resultSet.getString("firstname");
                     String lastname = resultSet.getString("lastname");
-                    account = new AccountDTO(username, password, firstname, lastname);
+                    boolean isAdmin = resultSet.getBoolean("isAdmin");
+                    account = new AccountDTO(username, password, firstname, lastname, isAdmin);
                 }
             }
         } finally {

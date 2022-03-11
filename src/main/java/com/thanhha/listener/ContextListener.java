@@ -19,11 +19,17 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
         String siteMapLocation =
                 context.getInitParameter("SITEMAP_PROPERTIES_FILE_LOCATION");
         String userAccess =
-                context.getInitParameter("AUTHORIZATION_PROPERTIES_USER_ACCESS");
+                context.getInitParameter("AUTHENTICATION_PROPERTIES_USER_ACCESS");
+        String userRole =
+                context.getInitParameter("AUTHORIZATION_PROPERTIES_USER_ROLE");
+
         Properties siteMapProperty = PropertiesFileHelper.getProperties(context, siteMapLocation);
         Properties accessRightProperty = PropertiesFileHelper.getProperties(context, userAccess);
+        Properties userRoleProperty = PropertiesFileHelper.getProperties(context, userRole);
+
         context.setAttribute("SITE_MAP", siteMapProperty);
         context.setAttribute("USER_ACCESS", accessRightProperty);
+        context.setAttribute("USER_ROLE", userRoleProperty);
     }
 
     @Override
